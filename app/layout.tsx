@@ -25,9 +25,9 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="h-full">
-      <body className="h-full m-0 bg-[#0a0a0a] antialiased overflow-hidden">
+      <body className="h-full m-0 bg-black antialiased overflow-hidden">
         <head>
-          <meta name="theme-color" content="#0a0a0a" />
+          <meta name="theme-color" content="#000000" />
           <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
           <link rel="manifest" href="/site.webmanifest" />
           <meta property="og:type" content="website" />
