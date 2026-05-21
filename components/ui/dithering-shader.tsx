@@ -428,12 +428,16 @@ export function DitheringShader({
     <div
       className={className}
       style={{
+        position: "fixed",
+        inset: 0,
         ...style,
       }}
     >
       <canvas
         ref={canvasRef}
         style={{
+          position: "absolute",
+          inset: 0,
           display: "block",
           width: "100%",
           height: "100%",

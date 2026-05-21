@@ -24,7 +24,7 @@ export function GlobalBackground() {
   if (!mounted) return null;
 
   return (
-    <div className="fixed inset-0 z-[-1] opacity-60 pointer-events-none">
+    <div className="fixed inset-0 z-0 overflow-hidden opacity-60 pointer-events-none">
       <DitheringShader
         width={dimensions.width}
         height={dimensions.height}
@@ -34,7 +34,8 @@ export function GlobalBackground() {
         type="8x8"
         pxSize={2}
         speed={0.3}
-        style={{ width: '100vw', height: '100vh', display: 'block' }}
+        className="absolute inset-0 block"
+        style={{ width: '100vw', height: '100vh' }}
       />
     </div>
   );

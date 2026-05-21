@@ -26,10 +26,10 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="h-full">
-      <body className="h-full m-0 antialiased overflow-y-auto">
+      <body className="relative h-full m-0 antialiased overflow-y-auto">
         <GlobalBackground />
-        <div className="crt-overlay" />
-        {children}
+        <div className="crt-overlay pointer-events-none" />
+        <div className="relative z-10">{children}</div>
 
         {/* Fixed contact link at bottom-center */}
         <footer className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 pointer-events-auto">
