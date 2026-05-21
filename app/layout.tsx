@@ -1,3 +1,4 @@
+import { PixelWaveBackground } from '@/components/pixel-wave-background';
 import './globals.css';
 
 export const metadata = {
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="h-full">
       <body className="h-full m-0 overflow-y-auto bg-black text-neutral-200 antialiased">
+        <PixelWaveBackground />
         {children}
 
         {/* Fixed contact link at bottom-center */}

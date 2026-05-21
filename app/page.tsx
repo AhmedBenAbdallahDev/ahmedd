@@ -12,7 +12,7 @@ export default function Home() {
           <div className="border border-neutral-800 bg-black/60 backdrop-blur-md p-8 md:p-12 rounded-lg">
             <TextScramble
               phrases={['Ahmed Warka (WIP)']}
-              textClass="text-4xl md:text-6xl font-bold tracking-tighter rainbow-wave mb-2"
+              textClass="text-2xl md:text-4xl font-bold pixel-title mb-2"
               dudClass="text-white/20"
               autoStart
               loop={false}
