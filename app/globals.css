@@ -167,30 +167,5 @@ body {
   border-radius: 20px;
 }
 
-/* User's preferred footer link styling (flex layout, no absolute pos) */
-footer a {
-  background: #00000000;
-  isolation: isolate;
-  color: #3b3b3b !important; /* stronger default color */
-  align-content: stretch;
-  text-align: center;
-  top: 96% !important; /* retained per request; has effect only if positioned */
-  left: auto;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  padding: 0;
-  margin-top: 93vh !important;
-  overflow: hidden;
-  text-decoration: none;
-  transition: color 150ms ease-in-out;
-}
-
-footer a:hover {
-  color: #a9d6ff !important; /* faint blue on hover (strong override) */
-}
-
 
 
