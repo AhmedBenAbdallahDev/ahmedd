@@ -1,3 +1,4 @@
+import { GlobalBackground } from '@/components/global-background';
 import './globals.css';
 
 export const metadata = {
@@ -25,19 +26,21 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="h-full">
-      <body className="h-full m-0 bg-black antialiased overflow-y-auto">
+      <body className="h-full m-0 antialiased overflow-y-auto">
+        <GlobalBackground />
         <div className="crt-overlay" />
         {children}
 
         {/* Fixed contact link at bottom-center */}
         <footer className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 pointer-events-auto">
           <a
-            href="mailto:ahmedbenabdallahdev@gmail.com"
+            href="https://github.com/JhunHoonHimself"
             className="text-sm text-neutral-400 hover:text-neutral-200 transition-colors"
-            aria-label="Email Ahmed Warka"
+            aria-label="GitHub JhunHoon"
             rel="noopener noreferrer"
+            target="_blank"
           >
-            ahmedbenabdallahdev@gmail.com
+            github.com/JhunHoonHimself
           </a>
         </footer>
       </body>
