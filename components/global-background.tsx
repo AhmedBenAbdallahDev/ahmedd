@@ -24,7 +24,7 @@ export function GlobalBackground() {
   if (!mounted) return null;
 
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden opacity-45 pointer-events-none">
+    <div className="fixed inset-0 -z-20 overflow-hidden opacity-35 pointer-events-none">
       <DitheringShader
         width={dimensions.width}
         height={dimensions.height}
