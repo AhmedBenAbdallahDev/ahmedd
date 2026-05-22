@@ -8,7 +8,7 @@ export default function Home() {
         <section className="mb-24">
           <div className="border border-neutral-800 bg-black/60 backdrop-blur-md p-8 md:p-12 rounded-lg">
             <h1 className="pixel-title text-lg md:text-2xl font-bold text-white mb-3 leading-relaxed">
-              Ahmed Warka <span className="text-neutral-400">(WIP)</span>
+              <span className="rainbow-wave">Ahmed Warka</span> <span className="text-neutral-400">(WIP)</span>
             </h1>
             <p className="text-xl md:text-2xl text-neutral-400 mt-4">
               Aspiring Game Developer & CS Student from Tunisia 🎮

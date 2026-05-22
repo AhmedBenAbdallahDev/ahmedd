@@ -14,7 +14,8 @@ body {
   overflow-x: hidden;
   margin: 0;
   font-family: 'JetBrains Mono', monospace;
-  background: #050505;
+  background:
+    radial-gradient(circle at top, rgba(20, 24, 44, 0.9) 0%, rgba(5, 5, 10, 1) 38%, rgba(1, 1, 2, 1) 100%);
   color: #e0e0e0;
 }
 
@@ -22,6 +23,31 @@ body {
   font-family: 'Press Start 2P', monospace;
   letter-spacing: 0.08em;
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.18);
+}
+
+@keyframes rainbow-wave {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.rainbow-wave {
+  display: inline-block;
+  background: linear-gradient(
+    90deg,
+    #ff5d5d,
+    #ffb84d,
+    #fff06a,
+    #7df9ff,
+    #8a7dff,
+    #ff7de9,
+    #ff5d5d
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbow-wave 4.5s linear infinite;
 }
 
 body::before,
@@ -36,28 +62,29 @@ body::after {
 body::before {
   inset: -24vmax;
   background:
-    radial-gradient(circle at 18% 22%, rgba(125, 211, 252, 0.28) 0 14%, transparent 34%),
-    radial-gradient(circle at 82% 20%, rgba(244, 114, 182, 0.22) 0 12%, transparent 32%),
-    radial-gradient(circle at 55% 68%, rgba(167, 139, 250, 0.22) 0 18%, transparent 38%),
-    radial-gradient(circle at 28% 78%, rgba(253, 224, 71, 0.16) 0 10%, transparent 28%),
-    radial-gradient(circle at 74% 74%, rgba(52, 211, 153, 0.18) 0 16%, transparent 34%),
-    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.06) 0 10%, transparent 46%);
-  filter: blur(26px) saturate(1.25) hue-rotate(0deg);
-  opacity: 0.82;
-  transform: scale(1.08);
-  animation: pixel-aurora-drift 28s ease-in-out infinite alternate, pixel-aurora-hue 44s linear infinite;
+    radial-gradient(circle at 18% 22%, rgba(125, 211, 252, 0.42) 0 12%, transparent 32%),
+    radial-gradient(circle at 82% 20%, rgba(244, 114, 182, 0.34) 0 10%, transparent 30%),
+    radial-gradient(circle at 55% 68%, rgba(167, 139, 250, 0.34) 0 16%, transparent 36%),
+    radial-gradient(circle at 28% 78%, rgba(253, 224, 71, 0.24) 0 8%, transparent 26%),
+    radial-gradient(circle at 74% 74%, rgba(52, 211, 153, 0.26) 0 14%, transparent 32%),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.08) 0 8%, transparent 42%);
+  filter: blur(30px) saturate(1.45) hue-rotate(0deg);
+  opacity: 0.95;
+  transform: scale(1.12);
+  animation: pixel-aurora-drift 22s ease-in-out infinite alternate, pixel-aurora-hue 28s linear infinite;
 }
 
 body::after {
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    radial-gradient(circle, rgba(255, 255, 255, 0.04) 0 1px, transparent 1.2px);
-  background-size: 14px 14px, 14px 14px, 7px 7px;
+    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    radial-gradient(circle, rgba(255, 255, 255, 0.06) 0 1px, transparent 1.2px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 36%, rgba(255, 255, 255, 0.03) 64%, transparent);
+  background-size: 12px 12px, 12px 12px, 6px 6px, 100% 100%;
   background-position: 0 0, 0 0, 0 0;
-  opacity: 0.2;
-  mix-blend-mode: soft-light;
-  animation: pixel-grid-shift 16s linear infinite;
+  opacity: 0.28;
+  mix-blend-mode: screen;
+  animation: pixel-grid-shift 10s linear infinite, pixel-scanline-flicker 4.5s ease-in-out infinite;
 }
 
 @keyframes pixel-aurora-drift {
@@ -86,7 +113,16 @@ body::after {
     background-position: 0 0, 0 0, 0 0;
   }
   100% {
-    background-position: 14px 14px, -14px -14px, 0 0;
+    background-position: 12px 12px, -12px -12px, 6px 6px;
+  }
+}
+
+@keyframes pixel-scanline-flicker {
+  0%, 100% {
+    opacity: 0.22;
+  }
+  50% {
+    opacity: 0.32;
   }
 }
 
