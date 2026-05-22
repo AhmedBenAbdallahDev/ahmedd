@@ -1,6 +1,3 @@
-'use client';
-
-import { TextScramble } from '@/components/text-scrammble';
 import Link from 'next/link';
 
 export default function Home() {
@@ -10,13 +7,9 @@ export default function Home() {
         {/* Hero Section */}
         <section className="mb-24">
           <div className="border border-neutral-800 bg-black/60 backdrop-blur-md p-8 md:p-12 rounded-lg">
-            <TextScramble
-              phrases={['Ahmed Warka (WIP)']}
-              textClass="text-2xl md:text-4xl font-bold pixel-title mb-2"
-              dudClass="text-white/20"
-              autoStart
-              loop={false}
-            />
+            <h1 className="pixel-title text-lg md:text-2xl font-bold text-white mb-3 leading-relaxed">
+              Ahmed Warka <span className="text-neutral-400">(WIP)</span>
+            </h1>
             <p className="text-xl md:text-2xl text-neutral-400 mt-4">
               Aspiring Game Developer & CS Student from Tunisia 🎮
             </p>
