@@ -1,118 +1,153 @@
+'use client';
+
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+
+const quotes = [
+  'I forge worlds from code. Dreams become playable reality.',
+  'Every pixel tells a story. Every algorithm births possibility.',
+  'Reality bends when the right systems click together.',
+  'Build small, iterate fast, and make the result feel alive.',
+];
+
+const commands = [
+  { prompt: 'root@ahmed:~$', command: 'whoami', output: 'Ahmed Ben Abdallah | Game Developer | Reality Architect' },
+  { prompt: 'root@ahmed:~$', command: 'cat ./mission.txt', output: 'Game dev, shaders, and web experiments with a terminal soul.' },
+  { prompt: 'root@ahmed:~$', command: 'ls ./projects/', output: 'void_walker.unity  neural_arena.exe  echo_realm.vr' },
+];
 
 export default function Home() {
+  const [quoteIndex, setQuoteIndex] = useState(0);
+  const [bootReady, setBootReady] = useState(false);
+
+  useEffect(() => {
+    const bootTimer = window.setTimeout(() => setBootReady(true), 1800);
+    const quoteTimer = window.setInterval(() => {
+      setQuoteIndex((current) => (current + 1) % quotes.length);
+    }, 3500);
+
+    return () => {
+      window.clearTimeout(bootTimer);
+      window.clearInterval(quoteTimer);
+    };
+  }, []);
+
   return (
-    <main className="relative min-h-screen text-neutral-200 font-mono">
-      <div className="relative z-10 max-w-4xl mx-auto px-6 py-20 md:py-32">
-        {/* Hero Section */}
-        <section className="mb-24">
-          <div className="border border-neutral-800 bg-black/60 backdrop-blur-md p-8 md:p-12 rounded-lg">
-            <h1 className="pixel-title text-lg md:text-2xl font-bold text-white mb-3 leading-relaxed">
-              <span className="rainbow-wave">Ahmed Ben Abdallah</span> <span className="text-neutral-400">(WIP)</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-neutral-400 mt-4">
-              Aspiring Game Developer & CS Student from Tunisia 🎮
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <a href="#about" className="px-4 py-2 bg-white text-black text-sm font-bold hover:bg-neutral-200 transition-colors whitespace-nowrap">
-                ./whoami
-              </a>
-              <a href="#projects" className="px-4 py-2 border border-white text-white text-sm font-bold hover:bg-white/10 transition-colors whitespace-nowrap">
-                ./ls projects
-              </a>
-              <Link href="/blog" className="px-4 py-2 border border-neutral-700 text-neutral-400 text-sm font-bold hover:text-white transition-colors whitespace-nowrap">
-                ./cat blog
-              </Link>
+    <main className="min-h-screen px-4 py-6 text-neutral-200 sm:px-6 lg:px-8">
+      <div className="mx-auto flex min-h-[calc(100vh-3rem)] w-full max-w-6xl items-center justify-center">
+        <section className="terminal-frame w-full overflow-hidden border border-white/10 bg-black/80 shadow-[0_24px_100px_rgba(0,0,0,0.65)] backdrop-blur-md">
+          <header className="flex items-center justify-between border-b border-white/10 px-4 py-3 sm:px-6">
+            <div className="flex items-center gap-3 text-[10px] uppercase tracking-[0.35em] text-neutral-400 sm:text-xs">
+              <span className="h-3 w-3 rounded-full bg-rose-400/90" />
+              <span className="h-3 w-3 rounded-full bg-amber-300/90" />
+              <span className="h-3 w-3 rounded-full bg-emerald-300/90" />
+              <span>SYSTEM://AHMED_DEV.EXE</span>
             </div>
-          </div>
-        </section>
+            <div className="text-xs tracking-[0.3em] text-neutral-500">AHMED BEN ABDALLAH</div>
+          </header>
 
-        {/* About Section */}
-        <section id="about" className="mb-24 scroll-mt-24">
-          <h2 className="text-2xl font-bold mb-8 flex items-center gap-2">
-            <span className="text-neutral-500">01.</span> About Me
-          </h2>
-          <div className="space-y-6 text-neutral-400 leading-relaxed">
-            <p>
-              I am a CS student and game dev from Tunisia. I love making things that people can play with and code that feels good to write.
-            </p>
-            <p>
-              Right now I am mostly using Godot to build games, but I spend a lot of time playing with WebGL and shaders. The web is a cool place to put games because anyone can just click a link and start playing.
-            </p>
-            <p>
-              When I am not at my computer, I usually play games like Celeste or Paper Mario. I like studying how they handle movement and how they look. This site is still a huge work in progress while I figure out what I want to show.
-            </p>
-          </div>
-        </section>
-
-        {/* Projects Section */}
-        <section id="projects" className="mb-24 scroll-mt-24">
-          <h2 className="text-2xl font-bold mb-8 flex items-center gap-2">
-            <span className="text-neutral-500">02.</span> Selected Work
-          </h2>
-            <div className="grid gap-6">
-              <div className="group border border-neutral-800 bg-neutral-900/40 p-6 hover:border-neutral-600 transition-colors">
-                <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">personal-site</h3>
-                  <span className="text-xs bg-neutral-800 px-2 py-1">Next.js</span>
+          <div className="grid gap-8 px-4 py-6 sm:px-6 lg:grid-cols-[1.35fr_0.95fr] lg:gap-10 lg:px-8 lg:py-8">
+            <div className="space-y-6">
+              <div className="space-y-4 rounded-2xl border border-white/10 bg-white/5 p-5 sm:p-6">
+                <p className="text-[10px] uppercase tracking-[0.4em] text-neutral-500">boot sequence</p>
+                <div className="space-y-2 font-mono text-sm text-neutral-300">
+                  <p className={bootReady ? 'opacity-80' : 'opacity-100'}>Initializing neural network...</p>
+                  <p className={bootReady ? 'opacity-80' : 'opacity-100'}>Loading creative subroutines...</p>
+                  <p className={bootReady ? 'opacity-80' : 'opacity-100'}>System ready.</p>
                 </div>
-                <p className="text-neutral-400 text-sm mb-4">
-                  this site! my personal portfolio where i showcase my game dev journey and web experiments
-                </p>
-                <a href="https://github.com/AhmedBenAbdallahDev/ahmedd" target="_blank" rel="noopener noreferrer" className="text-sm text-neutral-500 hover:text-white underline">
-                  view repository
-                </a>
               </div>
 
-              <div className="group border border-neutral-800 bg-neutral-900/40 p-6 hover:border-neutral-600 transition-colors">
-                <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">godot-3-demos</h3>
-                  <span className="text-xs bg-neutral-800 px-2 py-1">GDScript</span>
+              <div className="space-y-4 rounded-2xl border border-white/10 bg-white/[0.04] p-5 sm:p-6">
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.4em] text-neutral-500">headline</p>
+                  <h1 className="mt-3 font-mono text-2xl font-bold leading-tight text-white sm:text-4xl">
+                    Ahmed Ben Abdallah
+                  </h1>
+                  <p className="mt-2 text-sm uppercase tracking-[0.32em] text-neutral-500 sm:text-base">
+                    Game Developer · CS Student · Tunisia
+                  </p>
                 </div>
-                <p className="text-neutral-400 text-sm mb-4">
-                  demos for godot 3. this is for kinda work in progress
+
+                <div className="border-l-2 border-cyan-400/70 pl-4 text-base text-neutral-300 sm:text-lg">
+                  <span className="mr-2 text-cyan-300">&gt;</span>
+                  <span key={quoteIndex} className="quote-swap inline-block transition-opacity duration-300">
+                    {quotes[quoteIndex]}
+                  </span>
+                </div>
+
+                <div className="flex flex-wrap gap-3 pt-2 text-sm">
+                  <a href="#projects" className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-neutral-200 transition-colors hover:bg-white/10">
+                    ./ls projects
+                  </a>
+                  <a href="#contact" className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-neutral-200 transition-colors hover:bg-white/10">
+                    ./connect
+                  </a>
+                  <Link href="/blog" className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-neutral-200 transition-colors hover:bg-white/10">
+                    ./cat blog
+                  </Link>
+                </div>
+              </div>
+
+              <div id="about" className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 sm:p-6">
+                <p className="text-[10px] uppercase tracking-[0.4em] text-neutral-500">mission</p>
+                <p className="mt-3 max-w-2xl text-sm leading-7 text-neutral-400 sm:text-base">
+                  I build interactive experiences that feel tactile, playful, and a little strange. The focus is game development, shaders, and web experiments that behave like software with personality.
                 </p>
-                <a href="https://github.com/AhmedBenAbdallahDev/godot-3-demos" target="_blank" rel="noopener noreferrer" className="text-sm text-neutral-500 hover:text-white underline">
-                  view repository
-                </a>
+              </div>
+            </div>
+
+            <aside className="space-y-6">
+              <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 sm:p-6">
+                <p className="text-[10px] uppercase tracking-[0.4em] text-neutral-500">terminal log</p>
+                <div className="mt-4 space-y-4 font-mono text-sm">
+                  {commands.map((entry) => (
+                    <div key={entry.command} className="space-y-2">
+                      <div className="flex flex-wrap gap-x-3 gap-y-1 text-neutral-400">
+                        <span className="text-emerald-300">{entry.prompt}</span>
+                        <span className="text-cyan-200">{entry.command}</span>
+                      </div>
+                      <div className="border-l border-white/10 pl-3 text-neutral-300">{entry.output}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
-            <div className="group border border-neutral-800 bg-neutral-900/40 p-6 hover:border-neutral-600 transition-colors">
-              <div className="flex justify-between items-start mb-4">
-                <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">luminar-ai-data</h3>
-                <span className="text-xs bg-neutral-800 px-2 py-1">Data</span>
+              <div id="projects" className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 sm:p-6">
+                <p className="text-[10px] uppercase tracking-[0.4em] text-neutral-500">selected work</p>
+                <div className="mt-4 space-y-3">
+                  <div className="rounded-xl border border-white/10 bg-black/30 p-4">
+                    <div className="flex items-center justify-between gap-3">
+                      <h3 className="font-mono text-sm font-bold text-white">ahmedd</h3>
+                      <span className="text-[10px] uppercase tracking-[0.3em] text-neutral-500">Next.js</span>
+                    </div>
+                    <p className="mt-2 text-sm text-neutral-400">Current portfolio rebuilt as a terminal-style personal site.</p>
+                  </div>
+                  <div className="rounded-xl border border-white/10 bg-black/30 p-4">
+                    <div className="flex items-center justify-between gap-3">
+                      <h3 className="font-mono text-sm font-bold text-white">godot-3-demos</h3>
+                      <span className="text-[10px] uppercase tracking-[0.3em] text-neutral-500">GDScript</span>
+                    </div>
+                    <p className="mt-2 text-sm text-neutral-400">Experiment space for gameplay ideas, movement tests, and systems work.</p>
+                  </div>
+                  <div className="rounded-xl border border-white/10 bg-black/30 p-4">
+                    <div className="flex items-center justify-between gap-3">
+                      <h3 className="font-mono text-sm font-bold text-white">luminar-ai-data</h3>
+                      <span className="text-[10px] uppercase tracking-[0.3em] text-neutral-500">Data</span>
+                    </div>
+                    <p className="mt-2 text-sm text-neutral-400">Creative asset tracking and personal data tooling.</p>
+                  </div>
+                </div>
               </div>
-              <p className="text-neutral-400 text-sm mb-4">
-                Personal Luminar AI database for managing creative assets.
-              </p>
-              <a href="https://github.com/JhunHoonHimself/luminar-ai-data" target="_blank" className="text-sm text-neutral-500 hover:text-white underline">
-                view repository
-              </a>
-            </div>
+            </aside>
           </div>
-          <div className="mt-12 text-center">
-            <p className="text-neutral-500 text-sm italic">
-              "Building a strong digital footprint, one pixel at a time."
-            </p>
-          </div>
-        </section>
 
-        {/* Contact Section */}
-        <section id="contact" className="mb-24">
-          <div className="border border-neutral-800 p-8 text-center bg-black/40">
-            <h2 className="text-2xl font-bold mb-4 text-white">Let's Connect</h2>
-            <p className="text-neutral-400 mb-8 max-w-md mx-auto">
-              I'm always open to collaborating on game dev projects or talking about web tech.
-            </p>
-            <div className="flex justify-center gap-8">
-              <a href="https://github.com/AhmedBenAbdallahDev" target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-white underline decoration-neutral-700 underline-offset-4">GitHub</a>
-            </div>
-          </div>
+          <footer id="contact" className="flex flex-wrap items-center justify-between gap-4 border-t border-white/10 px-4 py-4 text-xs text-neutral-500 sm:px-6">
+            <p>© {new Date().getFullYear()} Ahmed Ben Abdallah. Built with code and a terminal bias.</p>
+            <a href="mailto:ahmedbenabdallahdev@gmail.com" className="text-neutral-300 underline decoration-white/20 underline-offset-4 transition-colors hover:text-white">
+              ahmedbenabdallahdev@gmail.com
+            </a>
+          </footer>
         </section>
-
-        <footer className="text-center text-neutral-600 text-xs">
-          <p>© {new Date().getFullYear()} Ahmed Ben Abdallah. Built with passion and code.</p>
-        </footer>
       </div>
     </main>
   );
