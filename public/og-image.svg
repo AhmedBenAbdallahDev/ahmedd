@@ -1,34 +1,39 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 27.5.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 800 800" style="enable-background:new 0 0 800 800;" xml:space="preserve">
-<g id="background">
-	<g>
-		<rect style="fill:#2D3033;" width="800" height="800"/>
-	</g>
-</g>
-<g id="graphic_element">
-	<g>
-		<defs>
-			<rect id="SVGID_1_" width="800" height="800"/>
-		</defs>
-		<clipPath id="SVGID_00000063630892084906594500000011253286068772187066_">
-			<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
-		</clipPath>
-		<g style="clip-path:url(#SVGID_00000063630892084906594500000011253286068772187066_);">
-			<g>
-				<defs>
-					<path id="SVGID_00000098932756844301876570000008002344990324021430_" d="M741.663,817.675c0-6.627,3.294-9.758,7.464-13.722
-						c4.519-4.296,9.641-9.164,9.641-18.796c0-9.632-5.122-14.501-9.641-18.797c-4.17-3.963-7.464-7.094-7.464-13.722
-						c0-6.626,3.294-9.756,7.463-13.719c4.52-4.295,9.642-9.162,9.642-18.791c0,9.63,5.122,14.499,9.641,18.794c4.17,3.963,7.464,7.093,7.464,13.719
-						c0,6.626-3.294,9.756-7.463,13.719c-4.519,4.295-9.642,9.164-9.642,18.794c0,9.631,5.122,14.499,9.641,18.794
-						c4.17,3.963,7.464,7.094,7.464,13.72c0,6.626-3.294,9.757-7.464,13.72c-4.519,4.296-9.641,9.163-9.641,18.794
-						c0,9.631,5.122,14.5,9.641,18.796c4.17,3.964,7.464,7.095,7.464,13.723c0,6.627-3.294,9.758-7.464,13.722
-						c-4.519,4.296-9.641,9.164-9.641,18.796c0,1.933,1.567,3.5,3.5,3.5C740.096,821.175,741.663,819.608,741.663,817.675z"/>
-				</defs>
-				... (file content truncated for brevity) ...
-			</g>
-		</g>
-	</g>
-</g>
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="15" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="url(#grad1)" />
+  
+  <!-- Abstract Decorative Elements -->
+  <circle cx="1000" cy="100" r="150" fill="#3b82f6" fill-opacity="0.1" filter="url(#glow)" />
+  <circle cx="200" cy="500" r="100" fill="#8b5cf6" fill-opacity="0.1" filter="url(#glow)" />
+  
+  <!-- Grid lines -->
+  <g stroke="#1e293b" stroke-width="1">
+    <path d="M 0 100 L 1200 100 M 0 200 L 1200 200 M 0 300 L 1200 300 M 0 400 L 1200 400 M 0 500 L 1200 500" />
+    <path d="M 100 0 L 100 630 M 200 0 L 200 630 M 300 0 L 300 630 M 400 0 L 400 630 M 500 0 L 500 630" />
+  </g>
+
+  <!-- Content -->
+  <text x="50%" y="45%" text-anchor="middle" font-family="monospace" font-size="72" font-weight="bold" fill="#ffffff">
+    Ahmed Ben Abdallah
+  </text>
+  <text x="50%" y="55%" text-anchor="middle" font-family="monospace" font-size="32" fill="#94a3b8" letter-spacing="4">
+    DEVELOPER &amp; CREATOR
+  </text>
+  
+  <!-- Accent Border -->
+  <rect x="40" y="40" width="1120" height="550" rx="10" stroke="#3b82f6" stroke-width="2" fill="none" stroke-opacity="0.3" />
 </svg>
