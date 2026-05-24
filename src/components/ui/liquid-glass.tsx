@@ -105,7 +105,7 @@ const GlassDock: React.FC<{ icons: DockIcon[]; href?: string }> = ({
               <img
                 src={icon.src}
                 alt={icon.alt}
-                className={`w-12 h-12 sm:w-16 sm:h-16 object-contain shrink-0 transition-all duration-700 hover:scale-110 cursor-pointer ${icon.className || ""}`}
+                className={`w-12 h-12 sm:w-16 sm:h-16 object-contain shrink-0 p-1.5 transition-all duration-700 hover:scale-110 cursor-pointer ${icon.className || ""}`}
                 style={{
                   transformOrigin: "center center",
                   transitionTimingFunction: "cubic-bezier(0.175, 0.885, 0.32, 2.2)",
@@ -198,29 +198,27 @@ const GlassFilter: React.FC = () => (
 export const Component = () => {
   const dockIcons: DockIcon[] = [
     {
-      src: "https://preview.redd.it/i-made-a-liquid-glass-icon-for-desktop-on-macos-v0-5xcoh7geueog1.png?width=1024&format=png&auto=webp&s=d6d7b23836b53d1fa4f60060cbb53186aadeff48",
-      alt: "/CarthageaDev",
+      src: "/icons/claude.png",
+      alt: "Claude",
     },
     {
-      src: "https://parsefiles.back4app.com/JPaQcFfEEQ1ePBxbf6wvzkPMEqKYHhPYv8boI1Rc/9e80c50a5802d3b0a7ec66f3fe4ce348_low_res_Finder.png",
+      src: "/icons/finder.png",
       alt: "Finder",
     },
     {
-      src: "https://cdn.jim-nielsen.com/macos/512/github-desktop-2021-05-20.png",
-      alt: "GitHub",
-      className: "drop-shadow-sm scale-[1.05]", 
-      style: { mixBlendMode: "multiply" as React.CSSProperties["mixBlendMode"] } 
+      src: "/icons/chatgpt.png",
+      alt: "Chatgpt",
     },
     {
-      src: "https://parsefiles.back4app.com/JPaQcFfEEQ1ePBxbf6wvzkPMEqKYHhPYv8boI1Rc/6d26d432bd65c522b0708185c0768ec3_low_res_Maps.png",
+      src: "/icons/maps.png",
       alt: "Maps",
     },
     {
-      src: "https://parsefiles.back4app.com/JPaQcFfEEQ1ePBxbf6wvzkPMEqKYHhPYv8boI1Rc/7c59c945731aecf4f91eb8c2c5f867ce_low_res_Safari.png",
+      src: "/icons/safari.png",
       alt: "Safari",
     },
     {
-      src: "https://parsefiles.back4app.com/JPaQcFfEEQ1ePBxbf6wvzkPMEqKYHhPYv8boI1Rc/b7f24edc7183f63dbe34c1943bef2967_low_res_Steam___Liquid_Glass__Default_.png",
+      src: "/icons/steam.png",
       alt: "Steam",
     },
   ];
