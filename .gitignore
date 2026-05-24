@@ -1,66 +1,35 @@
-# Node modules
-node_modules/
+# dependencies (bun install)
+node_modules
 
-# Next.js build output
-.next/
+# output
+out
+dist
+*.tgz
 
-# Production env files
-.env.local
-.env.*.local
+# code coverage
+coverage
+*.lcov
 
-# Local env files (do not commit)
+# logs
+logs
+_.log
+report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
+
+# dotenv environment variable files
 .env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
 
-# Logs
-logs/
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
+# caches
+.eslintcache
+.cache
+*.tsbuildinfo
 
-# OS files
+# IntelliJ based IDEs
+.idea
+
+# Finder (MacOS) folder config
 .DS_Store
-Thumbs.db
-
-# IDEs and editors
-.vscode/
-.idea/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-
-# Misc
-coverage/
-dist/
-build/
-.cache/
-.parcel-cache/
-
-# Vercel
-.vercel/
-
-# Turborepo
-.turbo/
-
-# Optional npm cache
-.npm/
-
-# Storybook build
-out/
-
-# Mac specific
-.AppleDouble
-.LSOverride
-
-# Ignore local Next build id
-.next/BUILD_ID
-
-# Ignore secrets and local configs
-secrets.env
-.env.production
-
-# Ignore generated files
-package-lock.json
-
+node_modules

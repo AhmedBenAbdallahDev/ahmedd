@@ -1,31 +1,24 @@
-import './globals.css';
+import type { Metadata } from "next";
+import "./globals.css";
 
-export const metadata = {
-  title: 'Ahmed Ben Abdallah | Game Developer',
-  description: 'Ahmed Ben Abdallah\'s personal portfolio. Aspiring Game Developer & Computer Science Student from Tunisia building games with Godot and exploring WebGL.',
-  metadataBase: process.env.NEXT_PUBLIC_SITE_URL ? new URL(process.env.NEXT_PUBLIC_SITE_URL) : undefined,
+export const metadata: Metadata = {
+  title: "Ahmed Ben Abdallah",
+  description: "Personal Portfolio",
   openGraph: {
-    title: 'Ahmed Ben Abdallah | Game Developer',
-    description: 'Ahmed Ben Abdallah\'s personal portfolio. Aspiring Game Developer & Computer Science Student from Tunisia building games with Godot and exploring WebGL.',
-    images: process.env.NEXT_PUBLIC_SITE_URL ? [process.env.NEXT_PUBLIC_SITE_URL + '/og-image.png'] : ['/og-image.png']
+    images: ["/og-image.png"],
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Ahmed Ben Abdallah | Game Developer',
-    description: 'Ahmed Ben Abdallah\'s personal portfolio. Aspiring Game Developer & Computer Science Student from Tunisia building games with Godot and exploring WebGL.',
-    images: process.env.NEXT_PUBLIC_SITE_URL ? [process.env.NEXT_PUBLIC_SITE_URL + '/og-image.png'] : ['/og-image.png']
-  },
-  icons: {
-    icon: '/favicon.svg',
-    shortcut: '/favicon.svg',
-    apple: '/favicon.svg'
-  }
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="en" className="h-full">
-      <body className="relative isolate h-full m-0 overflow-hidden bg-black text-neutral-200 antialiased">{children}</body>
+    <html lang="en">
+      <body className="antialiased font-mono bg-black text-white">
+        {children}
+      </body>
     </html>
   );
 }
