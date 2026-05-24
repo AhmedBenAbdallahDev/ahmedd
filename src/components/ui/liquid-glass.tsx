@@ -105,7 +105,7 @@ const GlassDock: React.FC<{ icons: DockIcon[]; href?: string }> = ({
               <img
                 src={icon.src}
                 alt={icon.alt}
-                className={`w-12 h-12 sm:w-16 sm:h-16 object-contain shrink-0 p-1 transition-all duration-700 hover:scale-110 cursor-pointer ${icon.className || ""}`}
+                className={`w-11 h-11 sm:w-14 sm:h-14 object-contain shrink-0 p-1 transition-all duration-700 hover:scale-110 cursor-pointer ${icon.className || ""}`}
                 style={{
                   transformOrigin: "center center",
                   transitionTimingFunction: "cubic-bezier(0.175, 0.885, 0.32, 2.2)",
