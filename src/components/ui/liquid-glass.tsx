@@ -218,6 +218,7 @@ export const Component = () => {
     {
       src: "/icons/chatgpt.png",
       alt: "@carthageadev",
+      onClick: () => window.open("https://x.com/carthageadev", "_blank")
     },
     {
       src: "/icons/maps.png",
