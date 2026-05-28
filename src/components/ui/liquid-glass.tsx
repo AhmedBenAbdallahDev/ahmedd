@@ -212,7 +212,7 @@ export const Component = () => {
     },
     {
       src: "/icons/linkedin-v2.png",
-      alt: "LinkedIn",
+      alt: "Ahmed Ben Abdallah",
       onClick: () => window.open("https://www.linkedin.com/in/ahmed-ben-abdallah-dev/", "_blank")
     },
     {
@@ -231,7 +231,7 @@ export const Component = () => {
     },
     {
       src: "/icons/steam.png",
-      alt: "Steam",
+      alt: "@carthageadev",
       onClick: () => window.open("https://steamcommunity.com/profiles/76561198104791194", "_blank")
     },
   ];
