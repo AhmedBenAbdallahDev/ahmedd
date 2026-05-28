@@ -235,15 +235,11 @@ export const Component = () => {
           muted
           playsInline
           className="absolute min-w-full min-h-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-cover opacity-80"
-          poster="https://video.squarespace-cdn.com/content/v1/5fe4caeadae61a2f19719512/60eee6e5-d34f-4a62-ba34-3927923867dd/thumbnail"
+          poster="https://moewalls.com/wp-content/uploads/preview/2021/rainy-day-in-japan-pixel-thumbnail.jpg"
         >
           <source 
-            src="https://video.squarespace-cdn.com/content/v1/5fe4caeadae61a2f19719512/60eee6e5-d34f-4a62-ba34-3927923867dd/1080p?format=mp4" 
-            type="video/mp4" 
-          />
-          <source 
-            src="https://video.squarespace-cdn.com/content/v1/5fe4caeadae61a2f19719512/60eee6e5-d34f-4a62-ba34-3927923867dd/720p?format=mp4" 
-            type="video/mp4" 
+            src="https://moewalls.com//wp-content/uploads/preview/2021/rainy-day-in-japan-pixel-preview.webm" 
+            type="video/webm" 
           />
         </video>
         {/* Fallback pattern/overlay if needed */}
