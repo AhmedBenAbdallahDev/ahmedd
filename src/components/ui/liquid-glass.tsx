@@ -234,20 +234,20 @@ export const Component = () => {
           loop
           muted
           playsInline
-          className="absolute min-w-full min-h-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-cover opacity-80"
-          poster="https://moewalls.com/wp-content/uploads/preview/2021/rainy-day-in-japan-pixel-thumbnail.jpg"
+          className="absolute min-w-full min-h-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-cover"
+          poster="https://moewalls.com/wp-content/uploads/preview/2026/sunlight-grass-thumbnail.jpg"
         >
           <source 
-            src="https://moewalls.com/wp-content/uploads/preview/2021/rainy-day-in-japan-pixel-preview.mp4" 
+            src="https://moewalls.com/wp-content/uploads/preview/2026/sunlight-grass-preview.mp4" 
             type="video/mp4" 
           />
           <source 
-            src="https://moewalls.com/wp-content/uploads/preview/2021/rainy-day-in-japan-pixel-preview.webm" 
+            src="https://moewalls.com/wp-content/uploads/preview/2026/sunlight-grass-preview.webm" 
             type="video/webm" 
           />
         </video>
-        {/* Fallback pattern/overlay if needed */}
-        <div className="absolute inset-0 bg-black/20" />
+        {/* Subtle overlay to help text readability */}
+        <div className="absolute inset-0 bg-black/10" />
       </div>
 
       <GlassFilter />
