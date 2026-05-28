@@ -34,7 +34,7 @@ const FloatingDamage: React.FC<{ item: FloatingDamageItem; onComplete: () => voi
         left: item.left,
         top: item.top,
         transform: "translate(-50%, -50%)",
-        textShadow: "0 0 10px rgba(0,0,0,0.5), 2px 2px 0px rgba(0,0,0,0.8)",
+        textShadow: "0 0 7px rgba(0,0,0,0.4), 1.5px 1.5px 0px rgba(0,0,0,0.65)",
         fontSize: "clamp(0.8rem, 2.4vw, 1.15rem)",
         WebkitTextStroke: "1px rgba(255,255,255,0.1)",
         animationDelay: "0ms",
