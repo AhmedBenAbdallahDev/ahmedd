@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Toaster, toast } from "sonner";
 import { Copy } from "lucide-react";
 
@@ -75,18 +75,81 @@ const GlassEffect: React.FC<GlassEffectProps> = ({
   );
 };
 
+const glassToastStyle: React.CSSProperties = {
+  background: "rgba(15, 23, 42, 0.72)",
+  border: "1px solid rgba(255,255,255,0.12)",
+  color: "white",
+  backdropFilter: "blur(18px)",
+  boxShadow: "0 12px 30px rgba(0, 0, 0, 0.18)",
+};
+
+const useIsTouchLike = () => {
+  const [isTouchLike, setIsTouchLike] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(hover: none), (pointer: coarse)");
+    const update = () => setIsTouchLike(mediaQuery.matches);
+
+    update();
+    mediaQuery.addEventListener?.("change", update);
+
+    return () => mediaQuery.removeEventListener?.("change", update);
+  }, []);
+
+  return isTouchLike;
+};
+
 // Dock Component
 const GlassDock: React.FC<{ icons: DockIcon[]; href?: string }> = ({
   icons,
   href,
 }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const isTouchLike = useIsTouchLike();
+  const dockRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!isTouchLike) return;
+
+    const clear = (event: PointerEvent) => {
+      if (dockRef.current && event.target instanceof Node && dockRef.current.contains(event.target)) {
+        return;
+      }
+
+      setActiveIndex(null);
+    };
+
+    document.addEventListener("pointerdown", clear);
+    return () => document.removeEventListener("pointerdown", clear);
+  }, [isTouchLike]);
+
+  const visibleIndex = isTouchLike ? activeIndex : hoveredIndex;
+  const isExpanded = isTouchLike ? activeIndex !== null : hoveredIndex !== null;
+
+  const handleIconPress = (event: React.MouseEvent, index: number, action?: () => void) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (!isTouchLike) {
+      action?.();
+      return;
+    }
+
+    if (activeIndex === index) {
+      action?.();
+      return;
+    }
+
+    setActiveIndex(index);
+    toast.message("Tap again to open", { style: glassToastStyle, duration: 1400 });
+  };
 
   return (
-    <div className="relative flex flex-col items-center">
+    <div ref={dockRef} className="relative flex flex-col items-center">
       <div 
-        className="mb-8 absolute -top-10 flex items-end justify-center transition-opacity duration-300 pointer-events-none"
-        style={{ opacity: hoveredIndex !== null ? 1 : 0 }}
+        className="mb-8 absolute -top-10 flex items-end justify-center transition-all duration-300 pointer-events-none"
+        style={{ opacity: isExpanded ? 1 : 0, transform: isExpanded ? "translateY(0)" : "translateY(4px)" }}
       >
         <span
           className="text-white text-sm font-medium tracking-wide whitespace-nowrap select-none"
@@ -94,31 +157,31 @@ const GlassDock: React.FC<{ icons: DockIcon[]; href?: string }> = ({
             textShadow: "0 1px 2px rgba(0,0,0,0.95), 0 0 10px rgba(0,0,0,0.35)",
           }}
         >
-          {hoveredIndex !== null ? icons[hoveredIndex].alt : ""}
+          {visibleIndex !== null ? icons[visibleIndex].alt : ""}
         </span>
       </div>
       <GlassEffect
         href={href}
-        className="rounded-3xl p-2.5 hover:p-3.5 hover:rounded-4xl"
+        className={`rounded-3xl p-2.5 transition-all duration-700 ${isTouchLike ? (activeIndex !== null ? "p-3.5 rounded-4xl" : "") : "hover:p-3.5 hover:rounded-4xl"}`}
       >
-        <div className="flex items-center justify-center gap-1.5 rounded-3xl p-2.5 py-0 px-1 overflow-hidden">
+        <div className={`flex items-center justify-center gap-1.5 rounded-3xl p-2.5 py-0 px-1 overflow-hidden transition-all duration-700 ${isTouchLike && activeIndex !== null ? "gap-2" : ""}`}>
           {icons.map((icon, index) => (
             <div 
               key={index}
               className="relative p-0.5"
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
+              onClick={(event) => handleIconPress(event, index, icon.onClick)}
             >
               <img
                 src={icon.src}
                 alt={icon.alt}
-                className={`w-11 h-11 sm:w-14 sm:h-14 object-contain shrink-0 p-1 transition-all duration-700 hover:scale-110 cursor-pointer ${icon.className || ""}`}
+                className={`w-11 h-11 sm:w-14 sm:h-14 object-contain shrink-0 p-1 transition-all duration-700 hover:scale-110 cursor-pointer ${isTouchLike && activeIndex === index ? "scale-110" : ""} ${icon.className || ""}`}
                 style={{
                   transformOrigin: "center center",
                   transitionTimingFunction: "cubic-bezier(0.175, 0.885, 0.32, 2.2)",
                   ...icon.style
                 }}
-                onClick={icon.onClick}
               />
             </div>
           ))}
@@ -204,6 +267,25 @@ const GlassFilter: React.FC = () => (
 );
 // Main Component
 export const Component = () => {
+  const [emailPressed, setEmailPressed] = useState(false);
+  const isTouchLike = useIsTouchLike();
+  const emailRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!isTouchLike) return;
+
+    const clear = (event: PointerEvent) => {
+      if (emailRef.current && event.target instanceof Node && emailRef.current.contains(event.target)) {
+        return;
+      }
+
+      setEmailPressed(false);
+    };
+
+    document.addEventListener("pointerdown", clear);
+    return () => document.removeEventListener("pointerdown", clear);
+  }, [isTouchLike]);
+
   const dockIcons: DockIcon[] = [
     {
       src: "/icons/claude.png", // This is actually the itch icon
@@ -239,7 +321,11 @@ export const Component = () => {
 
   return (
     <div className="min-h-screen h-full flex items-center justify-center font-light relative overflow-hidden w-full bg-black">
-      <Toaster position="top-center" richColors />
+      <Toaster
+        position="top-center"
+        richColors
+        toastOptions={{ style: glassToastStyle }}
+      />
       {/* Background Video */}
       <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
         <video
@@ -264,13 +350,23 @@ export const Component = () => {
       <div className="relative z-10 flex flex-col gap-6 items-center justify-center w-full">
         <GlassDock icons={dockIcons} href="https://x.com/carthageadev" />
 
-        <div 
-          onClick={() => {
+        <div
+          ref={emailRef}
+          onClick={(event) => {
+            event.stopPropagation();
+
+            if (isTouchLike && !emailPressed) {
+              setEmailPressed(true);
+              toast.message("Tap again to copy", { style: glassToastStyle, duration: 1400 });
+              return;
+            }
+
             navigator.clipboard.writeText("AhmedDev@email.com");
-            toast.success("Copied to clipboard!");
+            setEmailPressed(false);
+            toast.success("Copied to clipboard!", { style: glassToastStyle });
           }}
         >
-          <GlassButton className="px-6 py-3">
+          <GlassButton className={`px-6 py-3 transition-all duration-700 ${isTouchLike && emailPressed ? "px-7 py-4 rounded-4xl" : ""}`}>
             <div className="text-lg text-white flex items-center gap-3">
               <p>AhmedDev@email.com</p>
               <Copy size={16} className="opacity-60" />
