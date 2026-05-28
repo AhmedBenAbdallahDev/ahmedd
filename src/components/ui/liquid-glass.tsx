@@ -238,7 +238,11 @@ export const Component = () => {
           poster="https://moewalls.com/wp-content/uploads/preview/2021/rainy-day-in-japan-pixel-thumbnail.jpg"
         >
           <source 
-            src="https://moewalls.com//wp-content/uploads/preview/2021/rainy-day-in-japan-pixel-preview.webm" 
+            src="https://moewalls.com/wp-content/uploads/preview/2021/rainy-day-in-japan-pixel-preview.mp4" 
+            type="video/mp4" 
+          />
+          <source 
+            src="https://moewalls.com/wp-content/uploads/preview/2021/rainy-day-in-japan-pixel-preview.webm" 
             type="video/webm" 
           />
         </video>
