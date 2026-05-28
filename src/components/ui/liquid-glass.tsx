@@ -124,13 +124,14 @@ const GlassDock: React.FC<{ icons: DockIcon[]; href?: string }> = ({
 };
 
 // Button Component
-const GlassButton: React.FC<{ children: React.ReactNode; href?: string }> = ({
+const GlassButton: React.FC<{ children: React.ReactNode; href?: string; className?: string }> = ({
   children,
   href,
+  className = "",
 }) => (
   <GlassEffect
     href={href}
-    className="rounded-3xl px-8 py-4 hover:px-9 hover:py-5 hover:rounded-4xl overflow-hidden"
+    className={`rounded-3xl px-8 py-4 hover:px-9 hover:py-5 hover:rounded-4xl overflow-hidden ${className}`}
   >
     <div
       className="transition-all duration-700 hover:scale-95"
@@ -211,7 +212,7 @@ export const Component = () => {
     },
     {
       src: "/icons/chatgpt.png",
-      alt: "Chatgpt",
+      alt: "@carthageadev",
     },
     {
       src: "/icons/maps.png",
@@ -256,7 +257,7 @@ export const Component = () => {
       <GlassFilter />
 
       <div className="relative z-10 flex flex-col gap-6 items-center justify-center w-full">
-        <GlassDock icons={dockIcons} href="https://x.com/notsurajgaud" />
+        <GlassDock icons={dockIcons} href="https://x.com/carthageadev" />
 
         <div 
           onClick={() => {
