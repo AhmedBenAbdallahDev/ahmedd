@@ -1,8 +1,8 @@
 <div align="center">
-  <img width="1200" alt="Banner" src="banner.png" />
+  <img width="1200" alt="Banner" src="banner.webp" />
 </div>
 
-# Ahmed.me
+# ahmedd.is-a.dev
 
 A portfolio experiment designed with the philosophy that sometimes, simplicity works fine too.
 
