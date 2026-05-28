@@ -220,12 +220,14 @@ export const Component = () => {
       onClick: () => window.open("https://maps.apple.com/place?auid=9826624420830457525", "_blank")
     },
     {
-      src: "/icons/safari.png",
-      alt: "Safari",
+      src: "/icons/reddit.png",
+      alt: "u/CarthageaDev",
+      onClick: () => window.open("https://www.reddit.com/user/CarthageaDev/", "_blank")
     },
     {
       src: "/icons/steam.png",
       alt: "Steam",
+      onClick: () => window.open("https://steamcommunity.com/profiles/76561198104791194", "_blank")
     },
   ];
 
