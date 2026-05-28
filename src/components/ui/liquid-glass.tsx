@@ -226,17 +226,29 @@ export const Component = () => {
   ];
 
   return (
-    <div
-      className="min-h-screen h-full flex items-center justify-center font-light relative overflow-hidden w-full"
-      style={{
-        background: `url("https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzdsMnp0ZGoyNW5vZnQ0eWFyamFvZzdrMnltcnU2bzVjcW51NW95bSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/pVGsAWjzvXcZW4ZBTE/giphy.gif") center center`,
-        backgroundSize: "cover",
-        imageRendering: "pixelated",
-      }}
-    >
+    <div className="min-h-screen h-full flex items-center justify-center font-light relative overflow-hidden w-full bg-black">
+      {/* Background Video */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute min-w-full min-h-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-cover opacity-80"
+          poster="https://video.squarespace-cdn.com/content/v1/5fe4caeadae61a2f19719512/60eee6e5-d34f-4a62-ba34-3927923867dd/thumbnail"
+        >
+          <source 
+            src="https://video.squarespace-cdn.com/content/v1/5fe4caeadae61a2f19719512/60eee6e5-d34f-4a62-ba34-3927923867dd/1080p" 
+            type="video/mp4" 
+          />
+        </video>
+        {/* Fallback pattern/overlay if needed */}
+        <div className="absolute inset-0 bg-black/20" />
+      </div>
+
       <GlassFilter />
 
-      <div className="flex flex-col gap-6 items-center justify-center w-full">
+      <div className="relative z-10 flex flex-col gap-6 items-center justify-center w-full">
         <GlassDock icons={dockIcons} href="https://x.com/notsurajgaud" />
 
         <GlassButton href="https://x.com/notsurajgaud">
