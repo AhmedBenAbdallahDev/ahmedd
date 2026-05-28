@@ -4,6 +4,50 @@ import React, { useEffect, useRef, useState } from "react";
 import { Toaster, toast } from "sonner";
 import { Copy } from "lucide-react";
 
+// Floating Damage Text Component
+type FloatingDamageItem = {
+  id: string;
+  text: string;
+  left: number;
+  top: number;
+  driftX: number;
+  driftY: number;
+  rotate: number;
+};
+
+type FloatingDamageSpawn = {
+  text: string;
+  left?: number;
+  top?: number;
+};
+
+const FloatingDamage: React.FC<{ item: FloatingDamageItem; onComplete: () => void }> = ({ item, onComplete }) => {
+  useEffect(() => {
+    const timer = setTimeout(onComplete, 1600);
+    return () => clearTimeout(timer);
+  }, [onComplete]);
+
+  return (
+    <div 
+      className="fixed pointer-events-none z-[9999] font-bold text-white whitespace-nowrap animate-damage"
+      style={{
+        left: item.left,
+        top: item.top,
+        transform: "translate(-50%, -50%)",
+        textShadow: "0 0 10px rgba(0,0,0,0.5), 2px 2px 0px rgba(0,0,0,0.8)",
+        fontSize: "clamp(0.8rem, 2.4vw, 1.15rem)",
+        WebkitTextStroke: "1px rgba(255,255,255,0.1)",
+        animationDelay: "0ms",
+        ["--drift-x" as any]: `${item.driftX}px`,
+        ["--drift-y" as any]: `${item.driftY}px`,
+        ["--drift-rotate" as any]: `${item.rotate}deg`,
+      }}
+    >
+      {item.text}
+    </div>
+  );
+};
+
 // Types
 interface GlassEffectProps {
   children: React.ReactNode;
@@ -131,6 +175,13 @@ const GlassDock: React.FC<{ icons: DockIcon[]; href?: string }> = ({
     event.preventDefault();
     event.stopPropagation();
 
+    const target = event.currentTarget as HTMLElement;
+    const rect = target.getBoundingClientRect();
+    const spawnAnchor = {
+      left: rect.left + rect.width / 2 - 32 + (Math.random() * 8 - 4),
+      top: rect.top + 2 + (Math.random() * 4 - 2),
+    };
+
     if (!isTouchLike) {
       action?.();
       return;
@@ -142,7 +193,10 @@ const GlassDock: React.FC<{ icons: DockIcon[]; href?: string }> = ({
     }
 
     setActiveIndex(index);
-    toast.message("Tap again to open", { style: glassToastStyle, duration: 1400 });
+    const event1 = new CustomEvent<FloatingDamageSpawn>("spawn-damage", {
+      detail: { text: "Tap again", ...spawnAnchor },
+    });
+    window.dispatchEvent(event1);
   };
 
   return (
@@ -268,8 +322,33 @@ const GlassFilter: React.FC = () => (
 // Main Component
 export const Component = () => {
   const [emailPressed, setEmailPressed] = useState(false);
+  const [floatingTexts, setFloatingTexts] = useState<FloatingDamageItem[]>([]);
   const isTouchLike = useIsTouchLike();
   const emailRef = useRef<HTMLDivElement | null>(null);
+
+  const spawnDamage = (text: string, anchor?: { left: number; top: number }) => {
+    const id = Math.random().toString(36).substring(7);
+      const driftX = (Math.random() - 0.5) * 32;
+      const driftY = -20 - Math.random() * 14;
+      const rotate = (Math.random() - 0.5) * 6;
+
+    setFloatingTexts((prev) => [
+      ...prev,
+      {
+        id,
+        text,
+        left: anchor?.left ?? window.innerWidth * (0.4 + Math.random() * 0.2),
+        top: anchor?.top ?? window.innerHeight * 0.5,
+        driftX,
+        driftY,
+        rotate,
+      },
+    ]);
+  };
+
+  const removeDamage = (id: string) => {
+    setFloatingTexts((prev) => prev.filter((t) => t.id !== id));
+  };
 
   useEffect(() => {
     if (!isTouchLike) return;
@@ -286,47 +365,56 @@ export const Component = () => {
     return () => document.removeEventListener("pointerdown", clear);
   }, [isTouchLike]);
 
+  useEffect(() => {
+    const handleSpawn = (e: Event) => {
+      const custom = e as CustomEvent<FloatingDamageSpawn>;
+      spawnDamage(custom.detail.text, custom.detail.left !== undefined && custom.detail.top !== undefined ? { left: custom.detail.left, top: custom.detail.top } : undefined);
+    };
+
+    window.addEventListener("spawn-damage", handleSpawn as EventListener);
+    return () => window.removeEventListener("spawn-damage", handleSpawn as EventListener);
+  }, []);
+
   const dockIcons: DockIcon[] = [
     {
-      src: "/icons/claude.png", // This is actually the itch icon
+      src: "/icons/claude.png",
       alt: "carthagea.itch.io",
-      onClick: () => window.open("https://carthagea.itch.io/", "_blank")
+      onClick: () => window.open("https://carthagea.itch.io/", "_blank"),
     },
     {
       src: "/icons/linkedin-v2.png",
       alt: "Ahmed Ben Abdallah",
-      onClick: () => window.open("https://www.linkedin.com/in/ahmed-ben-abdallah-dev/", "_blank")
+      onClick: () => window.open("https://www.linkedin.com/in/ahmed-ben-abdallah-dev/", "_blank"),
     },
     {
       src: "/icons/chatgpt.png",
       alt: "@carthageadev",
-      onClick: () => window.open("https://x.com/carthageadev", "_blank")
+      onClick: () => window.open("https://x.com/carthageadev", "_blank"),
     },
     {
       src: "/icons/maps.png",
       alt: "Maps",
-      onClick: () => window.open("https://maps.apple.com/place?auid=9826624420830457525", "_blank")
+      onClick: () => window.open("https://maps.apple.com/place?auid=9826624420830457525", "_blank"),
     },
     {
       src: "/icons/reddit.png",
       alt: "u/CarthageaDev",
-      onClick: () => window.open("https://www.reddit.com/user/CarthageaDev/", "_blank")
+      onClick: () => window.open("https://www.reddit.com/user/CarthageaDev/", "_blank"),
     },
     {
       src: "/icons/steam.png",
       alt: "id/carthageadev",
-      onClick: () => window.open("https://steamcommunity.com/id/carthageadev/", "_blank")
+      onClick: () => window.open("https://steamcommunity.com/id/carthageadev/", "_blank"),
     },
   ];
 
   return (
     <div className="min-h-screen h-full flex items-center justify-center font-light relative overflow-hidden w-full bg-black">
-      <Toaster
-        position="top-center"
-        richColors
-        toastOptions={{ style: glassToastStyle }}
-      />
-      {/* Background Video */}
+      {floatingTexts.map((t) => (
+        <FloatingDamage key={t.id} item={t} onComplete={() => removeDamage(t.id)} />
+      ))}
+      <Toaster position="top-center" richColors />
+
       <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
         <video
           autoPlay
@@ -336,12 +424,8 @@ export const Component = () => {
           className="absolute min-w-full min-h-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-cover transition-opacity duration-1000"
           poster="/videos/sunlight-grass-poster-small.jpg"
         >
-          <source 
-            src="/videos/sunlight-grass-preview.mp4" 
-            type="video/mp4" 
-          />
+          <source src="/videos/sunlight-grass-preview.mp4" type="video/mp4" />
         </video>
-        {/* Subtle overlay to help text readability */}
         <div className="absolute inset-0 bg-black/10" />
       </div>
 
@@ -355,15 +439,18 @@ export const Component = () => {
           onClick={(event) => {
             event.stopPropagation();
 
+            const rect = emailRef.current?.getBoundingClientRect();
+            const anchor = rect ? { left: rect.right + 12, top: rect.top + 16 } : undefined;
+
             if (isTouchLike && !emailPressed) {
               setEmailPressed(true);
-              toast.message("Tap again to copy", { style: glassToastStyle, duration: 1400 });
+              spawnDamage("Tap again", anchor);
               return;
             }
 
             navigator.clipboard.writeText("AhmedDev@email.com");
             setEmailPressed(false);
-            toast.success("Copied to clipboard!", { style: glassToastStyle });
+            spawnDamage("Copied", anchor);
           }}
         >
           <GlassButton className={`px-6 py-3 transition-all duration-700 ${isTouchLike && emailPressed ? "px-7 py-4 rounded-4xl" : ""}`}>
@@ -373,7 +460,7 @@ export const Component = () => {
             </div>
           </GlassButton>
         </div>
-      </div>     
+      </div>
     </div>
   );
-}
+};

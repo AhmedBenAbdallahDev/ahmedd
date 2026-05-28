@@ -8,3 +8,25 @@
     background-position: 50% 100%;
   }
 }
+
+@keyframes float-up-damage {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.8) rotate(-5deg);
+  }
+  15% {
+    opacity: 1;
+    transform: translateY(-20px) scale(1.1) rotate(2deg);
+  }
+  30% {
+    transform: translateY(-35px) scale(1) rotate(-1deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-80px) scale(0.9) rotate(5deg);
+  }
+}
+
+.animate-damage {
+  animation: float-up-damage 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
