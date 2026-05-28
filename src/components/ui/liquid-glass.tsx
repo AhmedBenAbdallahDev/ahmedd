@@ -88,7 +88,7 @@ const GlassDock: React.FC<{ icons: DockIcon[]; href?: string }> = ({
         className="mb-8 absolute -top-10 flex items-end justify-center transition-opacity duration-300 pointer-events-none"
         style={{ opacity: hoveredIndex !== null ? 1 : 0 }}
       >
-        <span className="text-white text-sm font-medium tracking-wide drop-shadow-md">
+        <span className="text-white text-sm font-medium tracking-wide rounded-full bg-black/60 px-3 py-1 shadow-lg shadow-black/40 ring-1 ring-white/10 backdrop-blur-md whitespace-nowrap">
           {hoveredIndex !== null ? icons[hoveredIndex].alt : ""}
         </span>
       </div>
@@ -217,6 +217,7 @@ export const Component = () => {
     {
       src: "/icons/maps.png",
       alt: "Maps",
+      onClick: () => window.open("https://maps.apple.com/place?auid=9826624420830457525", "_blank")
     },
     {
       src: "/icons/safari.png",
