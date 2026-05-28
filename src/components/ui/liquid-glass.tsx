@@ -231,7 +231,7 @@ export const Component = () => {
     },
     {
       src: "/icons/steam.png",
-      alt: "@carthageadev",
+      alt: "id/carthageadev",
       onClick: () => window.open("https://steamcommunity.com/id/carthageadev/", "_blank")
     },
   ];
