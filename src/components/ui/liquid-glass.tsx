@@ -247,16 +247,12 @@ export const Component = () => {
           loop
           muted
           playsInline
-          className="absolute min-w-full min-h-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-cover"
-          poster="https://moewalls.com/wp-content/uploads/preview/2026/sunlight-grass-thumbnail.jpg"
+          className="absolute min-w-full min-h-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-cover transition-opacity duration-1000"
+          poster="/videos/sunlight-grass-poster-small.jpg"
         >
           <source 
-            src="https://moewalls.com/wp-content/uploads/preview/2026/sunlight-grass-preview.mp4" 
+            src="/videos/sunlight-grass-preview.mp4" 
             type="video/mp4" 
-          />
-          <source 
-            src="https://moewalls.com/wp-content/uploads/preview/2026/sunlight-grass-preview.webm" 
-            type="video/webm" 
           />
         </video>
         {/* Subtle overlay to help text readability */}
