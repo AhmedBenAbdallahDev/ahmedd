@@ -196,61 +196,6 @@ const GlassFilter: React.FC = () => (
     </filter>
   </svg>
 );
-// Background Video Component for crossfade looping
-const LoopingVideo = ({ src, poster }: { src: string; poster: string }) => {
-  const [activeVideo, setActiveVideo] = useState<'a' | 'b'>('a');
-  const videoRefA = React.useRef<HTMLVideoElement>(null);
-  const videoRefB = React.useRef<HTMLVideoElement>(null);
-
-  const handleTimeUpdate = (e: React.SyntheticEvent<HTMLVideoElement>) => {
-    const video = e.currentTarget;
-    const fadePoint = video.duration - 2;
-
-    if (video.currentTime >= fadePoint && activeVideo === (video === videoRefA.current ? 'a' : 'b')) {
-      const otherVideo = video === videoRefA.current ? videoRefB.current : videoRefA.current;
-      if (otherVideo) {
-        otherVideo.currentTime = 0;
-        otherVideo.play();
-        setActiveVideo(video === videoRefA.current ? 'b' : 'a');
-      }
-    }
-  };
-
-  return (
-    <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none bg-black">
-      <video
-        ref={videoRefA}
-        onTimeUpdate={handleTimeUpdate}
-        autoPlay
-        muted
-        playsInline
-        style={{ zIndex: activeVideo === 'a' ? 20 : 10 }}
-        className={`absolute min-w-full min-h-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-cover transition-opacity duration-[2000ms] ${
-          activeVideo === 'a' ? 'opacity-100' : 'opacity-0'
-        }`}
-        poster={poster}
-      >
-        <source src={src.replace(".webm", ".mp4")} type="video/mp4" />
-        <source src={src} type="video/webm" />
-      </video>
-      <video
-        ref={videoRefB}
-        onTimeUpdate={handleTimeUpdate}
-        muted
-        playsInline
-        style={{ zIndex: activeVideo === 'b' ? 20 : 10 }}
-        className={`absolute min-w-full min-h-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-cover transition-opacity duration-[2000ms] ${
-          activeVideo === 'b' ? 'opacity-100' : 'opacity-0'
-        }`}
-      >
-        <source src={src.replace(".webm", ".mp4")} type="video/mp4" />
-        <source src={src} type="video/webm" />
-      </video>
-      <div className="absolute inset-0 bg-black/10 z-30" />
-    </div>
-  );
-};
-
 // Main Component
 export const Component = () => {
   const dockIcons: DockIcon[] = [
@@ -285,11 +230,28 @@ export const Component = () => {
   return (
     <div className="min-h-screen h-full flex items-center justify-center font-light relative overflow-hidden w-full bg-black">
       <Toaster position="top-center" richColors />
-      
-      <LoopingVideo 
-        src="https://moewalls.com/wp-content/uploads/preview/2026/sunlight-grass-preview.webm"
-        poster="https://moewalls.com/wp-content/uploads/preview/2026/sunlight-grass-thumbnail.jpg"
-      />
+      {/* Background Video */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute min-w-full min-h-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-cover"
+          poster="https://moewalls.com/wp-content/uploads/preview/2026/sunlight-grass-thumbnail.jpg"
+        >
+          <source 
+            src="https://moewalls.com/wp-content/uploads/preview/2026/sunlight-grass-preview.mp4" 
+            type="video/mp4" 
+          />
+          <source 
+            src="https://moewalls.com/wp-content/uploads/preview/2026/sunlight-grass-preview.webm" 
+            type="video/webm" 
+          />
+        </video>
+        {/* Subtle overlay to help text readability */}
+        <div className="absolute inset-0 bg-black/10" />
+      </div>
 
       <GlassFilter />
 
